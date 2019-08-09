@@ -400,8 +400,9 @@ class Agilent33500(Instrument):
         """ Send a trigger signal to the function generator. """
         self.write("*TRG;*WAI")
 
-    def wait_for_trigger(self, timeout=3600, should_stop=lambda: False):
-        """ Wait until the triggering has finished or timeout is reached.
+    def wait_for_operation_to_finish(self, timeout=3600, should_stop=lambda: False):
+        """ Wait until the currently active operations have finished or timeout is reached.
+        This can be used to check, if a trigger was executed.
 
         :param timeout: The maximum time the waiting is allowed to take. If
                         timeout is exceeded, a TimeoutError is raised. If
